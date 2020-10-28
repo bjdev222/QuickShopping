@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "716693790327",
+    "firebase_url": "https://smartshoppingcart-7665f.firebaseio.com",
+    "project_id": "smartshoppingcart-7665f",
+    "storage_bucket": "smartshoppingcart-7665f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716693790327:android:2f14190935b8192a8df072",
+        "android_client_info": {
+          "package_name": "com.infinite.smartshoppingcart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "716693790327-9oppqq6kni8buctma2dad8vbbiqlii10.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.infinite.smartshoppingcart",
+            "certificate_hash": "ad7735702a9a57ccace46ea9972ef01d5434fe35"
+          }
+        },
+        {
+          "client_id": "716693790327-oh07dd1fuunsalfo49klga2c9qi77qcj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPpitQmP0sAZ-z8cfl_RngY20OnxbI03Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "716693790327-oh07dd1fuunsalfo49klga2c9qi77qcj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
