@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -31,10 +32,12 @@ public class Inventory extends AppCompatActivity {
     int maxid=0;
     RecyclerView Trcv;
     myAdapter madapter;
-    TextView total;
+    TextView total,txt;
     DatabaseReference reff2;
     FirebaseDatabase database;
     int sum=0;
+    ProgressDialog pd;
+
 
 
 
@@ -42,6 +45,12 @@ public class Inventory extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory);
+
+         pd = new ProgressDialog(Inventory.this);
+        pd.setMessage("Wait we are fetching data..");
+        pd.show();
+
+
 
 
         Trcv=findViewById(R.id.trcv);
@@ -55,9 +64,11 @@ public class Inventory extends AppCompatActivity {
 
 // to get current user uid
         String currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser().getUid() ;
+
+        final String temp2=currentFirebaseUser;
         //   Toast.makeText(this, currentFirebaseUser, Toast.LENGTH_SHORT).show();
 
-        FirebaseRecyclerOptions<model> options =
+        final FirebaseRecyclerOptions<model> options =
                 new FirebaseRecyclerOptions.Builder<model>()
                         .setQuery(FirebaseDatabase.getInstance().getReference().child(currentFirebaseUser), model.class)
                         // .setQuery(FirebaseDatabase.getInstance().getReference("Student_Record").orderByChild("like").equalTo("50000"), model.class)
@@ -65,8 +76,30 @@ public class Inventory extends AppCompatActivity {
                         .build();
 
 
-        madapter = new myAdapter(options);
+        madapter = new myAdapter(options){
+            @Override
+            protected void onBindViewHolder(@NonNull myViewHolder holder, final int position, @NonNull model model) {
+
+
+                holder.title.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(Inventory.this, getRef(position).getKey(), Toast.LENGTH_SHORT).show();
+                        String abc=getRef(position).getKey();
+
+
+
+
+
+
+                    }
+                });
+                super.onBindViewHolder(holder, position, model);
+            }
+        };
+
         Trcv.setAdapter(madapter);
+
 
 
 
@@ -106,12 +139,19 @@ public class Inventory extends AppCompatActivity {
 
                 }
                 total.setText(String.valueOf(sum));
+                pd.dismiss();
+
+
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {}
+            public void onCancelled(DatabaseError databaseError) {
+
+
+            }
         };
         uidRef.addListenerForSingleValueEvent(valueEventListener);
+
 
 
 
@@ -130,6 +170,7 @@ public class Inventory extends AppCompatActivity {
             Map singleUser = (Map) entry.getValue();
             //Get phone field and append to list
             phoneNumbers.add((Long) singleUser.get("price"));
+
         }
 
         System.out.println(phoneNumbers.toString());

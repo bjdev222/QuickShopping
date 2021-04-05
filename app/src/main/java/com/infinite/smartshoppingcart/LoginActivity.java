@@ -27,7 +27,6 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences sp;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
